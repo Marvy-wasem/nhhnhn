@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>هدية صغيرة لماما 💗</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:'Cairo',sans-serif;background:linear-gradient(135deg,#ffe6f0,#fff4f7,#fce4ec);color:#8f365b;display:flex;justify-content:center;align-items:center;padding:20px;overflow-x:hidden}
+#hearts{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:5}
+.float-heart{position:absolute;bottom:-40px;animation:floatUp linear forwards}
+@keyframes floatUp{to{transform:translateY(-110vh) rotate(360deg);opacity:0}}
+.game{width:100%;max-width:460px;position:relative;z-index:1;background:rgba(255,255,255,.92);border:2px solid #ffd0e1;border-radius:30px;padding:24px 20px;text-align:center;box-shadow:0 15px 45px #d88aa533;overflow:hidden}
+h1{color:#cc4779;font-size:clamp(25px,7vw,34px);margin:8px 0}
+p{line-height:2}
+.small{font-size:13px;color:#c27c99}
+.scene{position:relative;height:205px;margin:18px 0;border-radius:22px;overflow:hidden;background:linear-gradient(#fff0f6 0%,#ffe1ec 75%,#f7c7d9 75%)}
+.cloud{position:absolute;top:20px;font-size:30px;animation:clouds 9s linear infinite}
+.cloud.one{left:10%}.cloud.two{left:65%;animation-delay:-4s}
+@keyframes clouds{from{transform:translateX(70px)}to{transform:translateX(-100px)}}
+.flower{position:absolute;bottom:28px;font-size:24px}.flower.f1{left:8%}.flower.f2{right:7%}
+.bunny{position:absolute;bottom:29px;left:14%;font-size:69px;z-index:2;transform-origin:bottom center;animation:hop .65s ease-in-out infinite alternate}
+@keyframes hop{from{transform:translateY(0) rotate(-4deg)}to{transform:translateY(-12px) rotate(4deg)}}
+.bunny.run{animation:runToBox 1.8s ease-in-out forwards}
+@keyframes runToBox{0%{left:14%;transform:translateY(0) rotate(0)}35%{transform:translateY(-35px) rotate(12deg)}70%{transform:translateY(0) rotate(-8deg)}100%{left:49%;transform:translateY(0) rotate(0)}}
+.box-gift{position:absolute;right:13%;bottom:25px;font-size:75px;filter:drop-shadow(0 5px 3px #ad547455)}
+.box-gift.shake{animation:shake .3s ease-in-out 4}
+@keyframes shake{0%,100%{transform:rotate(0)}25%{transform:rotate(-10deg)}75%{transform:rotate(10deg)}}
+.dialog{background:#fff1f6;border:1px solid #ffd1e0;border-radius:20px;padding:14px 12px;margin:15px 0}
+.dialog h2{margin:4px 0;font-size:21px;color:#b83c6c}.dialog p{margin:5px 0;font-size:14px}
+.buttons{display:flex;gap:12px;margin-top:18px}
+button{flex:1;min-height:49px;border:0;border-radius:16px;padding:10px;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer;transition:transform .2s}
+button:active{transform:scale(.95)}
+.yes{background:linear-gradient(135deg,#ed78a3,#d94479);color:white;box-shadow:0 5px 12px #e9a0ba77}
+.no{background:#fff;color:#c04d78;border:2px solid #f5c3d5}
+.hidden{display:none!important}
+.letter{animation:appear .8s ease both}
+@keyframes appear{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+.big-heart{font-size:55px;animation:beat 1s infinite;display:inline-block}
+@keyframes beat{50%{transform:scale(1.18)}}
+.message{background:#fff5f8;border-radius:20px;padding:16px;font-size:15px;line-height:2.1;text-align:center}
+.message p{margin:10px 0}.signature{color:#c13f71;font-size:19px;font-weight:800}
+.gift-open{animation:openGift .8s ease}
+@keyframes openGift{0%{transform:scale(1) rotate(0)}50%{transform:scale(1.35) rotate(-12deg)}100%{transform:scale(1) rotate(0)}}
+.restart{margin-top:16px;width:100%}footer{margin-top:20px;font-size:12px;color:#c28ba1}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body>
+<div id="hearts"></div>
+<main class="game">
+  <div id="startScreen">
+    <div class="small">♡ مغامرة صغيرة مليانة حب ♡</div>
+    <h1>فيه هدية لماما! 💗</h1>
+    <div class="scene">
+      <span class="cloud one">☁️</span><span class="cloud two">☁️</span>
+      <span class="flower f1">🌷</span><span class="flower f2">🌼</span>
+      <div class="bunny" id="bunny">🐰</div><div class="box-gift" id="gift">🎁</div>
+    </div>
+    <div class="dialog">
+      <h2 id="question">ممكن تساعديني أشيل العلبة؟ 🥺</h2>
+      <p id="subQuestion">الأرنب الصغير مش قادر يشيلها لوحده!</p>
+    </div>
+    <div class="buttons" id="buttons">
+      <button class="yes" onclick="helpBunny()">أيوه طبعًا 💕</button>
+      <button class="no" onclick="sayNo()">لأ 🙈</button>
+    </div>
+    <p class="small" id="hint">الأرنب مخبي مفاجأة جوا العلبة 🎀</p>
+  </div>
+  <div id="letterScreen" class="hidden letter">
+    <div class="big-heart">💗</div><h1>المفاجأة لماما! 🌷</h1>
+    <div class="scene">
+      <span class="cloud one">☁️</span><span class="flower f1">🌸</span><span class="flower f2">🌷</span>
+      <div class="bunny" style="left:18%;animation:none">🐰</div>
+      <div class="box-gift gift-open" style="right:15%">💝</div>
+    </div>
+    <div class="message">
+      <h2 style="color:#c13f71">أمي الحبيبة ❤️</h2>
+      <p>شكرًا لأنكِ دائمًا بجانبي، ولأنكِ مصدر الأمان والحب في كل لحظة من حياتي.</p>
+      <p>وجودكِ نعمة، واهتمامكِ حياة، وقلبكِ أغلى ما أملك.</p>
+      <p>مهما كبرت، هيفضل حضنك أماني، ودعواتك أجمل هدية، وابتسامتك أجمل حاجة في الدنيا.</p>
+      <p>ربنا يخليكي نور في حياتنا، ويديكي من الفرح أضعاف كل الحب اللي بتديهولنا.</p>
+      <p class="signature">بحبك يا أمي، حب أكبر من كل الكلام ❤️</p>
+      <div>🌸 💕 🌷 💗 🌸</div>
+    </div>
+    <button class="yes restart" onclick="restartGame()">نلعب من الأول؟ 🐰</button>
+  </div>
+  <footer>معمولة بكل الحب لأغلى أم في الدنيا ♡</footer>
+</main>
+<script>
+const bunny=document.getElementById('bunny'),gift=document.getElementById('gift');
+const question=document.getElementById('question'),subQuestion=document.getElementById('subQuestion');
+const buttons=document.getElementById('buttons');let noCount=0,busy=false;
+function makeHearts(count=20){
+ const container=document.getElementById('hearts'),emojis=['💗','💕','💖','❤️','🌸','💝'];
+ for(let i=0;i<count;i++){const heart=document.createElement('span');heart.className='float-heart';heart.textContent=emojis[Math.floor(Math.random()*emojis.length)];heart.style.left=Math.random()*100+'vw';heart.style.fontSize=(18+Math.random()*22)+'px';heart.style.animationDuration=(2+Math.random()*2)+'s';heart.style.animationDelay=Math.random()*.8+'s';container.appendChild(heart);setTimeout(()=>heart.remove(),5000)}
+}
+function helpBunny(){
+ if(busy)return;busy=true;question.textContent='ياااي! هتساعديني! 🥹💗';subQuestion.textContent='يلا نشيل الهدية سوا...';
+ bunny.classList.remove('run');void bunny.offsetWidth;bunny.classList.add('run');gift.classList.add('shake');makeHearts(15);
+ setTimeout(()=>{document.getElementById('startScreen').classList.add('hidden');document.getElementById('letterScreen').classList.remove('hidden');makeHearts(45);busy=false},2100)
+}
+function sayNo(){
+ if(busy)return;noCount++;
+ const messages=[['طب عشان خاطري؟ 🥺','الهدية دي لماما، ومحتاج مساعدتك أوي!'],['بصي لعيوني الكيوت 🥹','مش هقدر أشيلها لوحدي خالص!'],['آخر طلب بقى 💗','ساعديني ونشوف المفاجأة الحلوة سوا!']];
+ const m=messages[Math.min(noCount-1,messages.length-1)];question.textContent=m[0];subQuestion.textContent=m[1];
+ bunny.style.animation='none';void bunny.offsetWidth;bunny.style.animation='hop .65s ease-in-out infinite alternate';
+ gift.classList.remove('shake');void gift.offsetWidth;gift.classList.add('shake');makeHearts(8);
+ buttons.querySelector('.no').textContent='لسه لأ 🙈'
+}
+function restartGame(){
+ document.getElementById('letterScreen').classList.add('hidden');document.getElementById('startScreen').classList.remove('hidden');
+ question.textContent='ممكن تساعديني أشيل العلبة؟ 🥺';subQuestion.textContent='الأرنب الصغير مش قادر يشيلها لوحده!';
+ document.getElementById('hint').textContent='الأرنب مخبي مفاجأة جوا العلبة 🎀';
+ bunny.classList.remove('run');gift.classList.remove('shake');buttons.querySelector('.no').textContent='لأ 🙈';noCount=0;busy=false
+}
+</script>
+</body>
+</html>
